@@ -7,7 +7,11 @@ export default new Vuex.Store({
   state: {
     carsForBuy:[
     ],
-    carForBuy:''
+    carForBuy:'',
+    carDbUser: [
+
+    ],
+    user:[]
     
   },
   mutations: {
@@ -16,7 +20,10 @@ export default new Vuex.Store({
     },
     carBuyStatus(state,carBuy){
       state.carForBuy=carBuy;
-    }
+    },
+    userStatus(state,user){
+      state.user=user;
+    },
   },
   actions: {
     /*addFromDatabase(state,{commit}){
@@ -39,7 +46,10 @@ export default new Vuex.Store({
     },
     setCarBuy(context,carBuy){
       context.commit('carBuyStatus',carBuy);
-    }
+    },
+    setUser(context,user){
+      context.commit('userStatus',user);
+    },
   },
   modules: {
   },

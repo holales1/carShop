@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
 import Car from '../views/CarInformation.vue'
+import Login from '../components/admin/Login.vue'
+import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
@@ -10,17 +12,26 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+   
   },
   {
     path: '/cars',
     name: 'Cars',
-    component: Cars
+    component: Cars,
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/car/:id',
     name: 'car',
     component: Car
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
     path: '/about',
@@ -38,5 +49,18 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  var currentUser;
+  if(store.state.user.length==0){
+    currentUser = null;
+  }else{
+    currentUser = store.state.user;
+  }
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next('login');
+  else next();
+
+});
 
 export default router

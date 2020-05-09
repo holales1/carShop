@@ -17,7 +17,7 @@
             </v-card-subtitle>
 
             <v-card-actions>
-                <v-btn text>Motor:{{ca.motor}}</v-btn>
+                <v-btn text>Price:{{ca.price}} kr</v-btn>
 
                 <v-btn color="purple" text>
                     Buy
@@ -35,6 +35,9 @@
                 <v-divider></v-divider>
                 <v-card-text>
                     {{ ca.description }}
+                </v-card-text>
+                <v-card-text>
+                    {{ ca.motor }}
                 </v-card-text>
             </div>
             </v-expand-transition>

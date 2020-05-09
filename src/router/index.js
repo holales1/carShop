@@ -2,8 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
+import Admin from '../views/Admin.vue'
 import Car from '../views/CarInformation.vue'
 import Login from '../components/admin/Login.vue'
+import AddNew from '../components/admin/AddNewItems.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
@@ -19,9 +21,6 @@ Vue.use(VueRouter)
     path: '/cars',
     name: 'Cars',
     component: Cars,
-    meta:{
-      requiresAuth:true
-    }
   },
   {
     path: '/car/:id',
@@ -32,6 +31,22 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    meta:{
+      requiresAuth:true
+    }
+  },
+  {
+    path: '/addNew',
+    name: 'addNew',
+    component: AddNew,
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/about',

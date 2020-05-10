@@ -80,6 +80,7 @@ import store from '../store/index.js';
         computed:{
             carsBuy(){
                 return this.$store.getters.getCarsBuy;
+                
             }
         }
     }

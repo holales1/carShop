@@ -37,7 +37,8 @@ Vue.use(VueRouter)
     name: 'admin',
     component: Admin,
     meta:{
-      requiresAuth:true
+      requiresAuth:true,
+      requiresAuth2:true
     }
   },
   {
@@ -45,7 +46,8 @@ Vue.use(VueRouter)
     name: 'addNew',
     component: AddNew,
     meta:{
-      requiresAuth:true
+      requiresAuth:true,
+      requiresAuth2:true
     }
   },
   {
@@ -66,7 +68,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   var currentUser;
-  if(store.state.user.length==0){
+  if(store.state.user==null ||store.state.user.length==0){
     currentUser = null;
   }else{
     currentUser = store.state.user;
@@ -76,6 +78,32 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !currentUser) next('login');
   else next();
 
+});
+
+router.beforeEach((to, from, next) => {
+  var currentUser;
+  if(store.state.user==null ||store.state.user.length==0){
+    currentUser = null;
+  }else{
+    currentUser = store.state.user;
+  }
+  const requiresAuth2 = to.matched.some(record => record.meta.requiresAuth2);
+  var admin;
+  if(store.state.user==null || store.state.user.length==0){
+    admin=null;
+  }else{
+  admin=store.state.user[0]["admin"];
+  }
+
+  if (requiresAuth2 && !currentUser  ){
+    alert('You are not allowed');
+   
+  }else if(admin=="0" && requiresAuth2){
+    alert('You are not allowed');
+     
+  }else{
+    next();
+  }
 });
 
 export default router

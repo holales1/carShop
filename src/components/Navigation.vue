@@ -8,6 +8,7 @@
         <router-link tag="li" to="/"><v-icon color="orange">home</v-icon>Home</router-link>
         <router-link tag="li" to="/cars"><v-icon color="orange">directions_car</v-icon>Cars</router-link>
         <router-link tag="li" to="/about"><v-icon color="inprogress">info</v-icon>About</router-link>
+        <router-link tag="li" to="/login"><v-icon color="inprogress">account_circle</v-icon>Login</router-link>
         <router-link tag="li" to="/admin"><v-icon color="inprogress">lock</v-icon>Admin</router-link>
       </ul>
     </v-navigation-drawer>
@@ -42,11 +43,13 @@
     padding: 5px 20px;
     list-style-type: none;
     cursor: pointer;
+    color: orange
   }
 
 nav li i{
   margin-right: 10px;
 }
+
 
 nav li:last-child{
   position: absolute;

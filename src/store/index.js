@@ -50,12 +50,16 @@ export default new Vuex.Store({
     setUser(context,user){
       context.commit('userStatus',user);
     },
+    setSignOutUser(context,user){
+      context.commit('userStatus',user);
+    },
   },
   modules: {
   },
   getters:{
     getCarsBuy: state => state.carsForBuy,
-    getCarBuy: state => state.carForBuy
+    getCarBuy: state => state.carForBuy,
+    getUser: state => state.user
   },
   
     

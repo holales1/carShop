@@ -27,7 +27,7 @@
                         color="incomplete"
                         @click.prevent="signOut()"
                     >
-                    SignOut
+                    Sign Out
                     </v-btn>
                 </div>
             </v-col>
@@ -49,22 +49,43 @@ import store from '../../store/index.js';
         },
         methods:{
             signIn(){
-                axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbUserRead.php?email='+this.email+'&pass='+this.password)
-                .then(response => {
-                    if(response.data.length==0){
-                        alert("Wrong email/password")
-                    }else{
-                        store.dispatch('setUser',response.data);
-                        this.$router.replace('/admin')
-                    }
-                    
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
+                if(this.$store.getters.getUser==null || this.$store.getters.getUser.length==0){
+
+                
+                    axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbUserRead.php?email='+this.email+'&pass='+this.password)
+                    .then(response => {
+                        if(response.data.length==0){
+                            alert("Wrong email/password")
+                        }else{
+                            store.dispatch('setUser',response.data);
+                            console.log(response.data[0]['admin']=="0");
+                            if(response.data[0]['admin']=="0"){
+                                this.$router.replace('/');
+                            }else{
+                                this.$router.replace('/admin');
+                            }
+                            
+                        }
+                        
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+                }else{
+                    alert("You are already log in");
+                }
             },
             signOut(){
-                
+                if(this.$store.getters.getUser==null || this.$store.getters.getUser.length==0){
+                    alert('You are not logged in right now')
+                }else{
+                    var user=null;
+                    store.dispatch('setSignOutUser',user);
+                    console.log(this.$store.getters.getUser);
+                    if(this.$store.getters.getUser==null){
+                        alert('You have sign out')
+                    }
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cars from '../views/Cars.vue'
 import Admin from '../views/Admin.vue'
+import BuyCar from '../views/BuyCar.vue'
 import Car from '../views/CarInformation.vue'
 import Login from '../components/admin/Login.vue'
 import AddNew from '../components/admin/AddNewItems.vue'
@@ -31,6 +32,14 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/buycar/:id',
+    name: 'buycar',
+    component: BuyCar,
+    meta:{
+      requiresAuth:true,
+    }
   },
   {
     path: '/admin',
@@ -75,7 +84,7 @@ router.beforeEach((to, from, next) => {
   }
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (requiresAuth && !currentUser) next('login');
+  if (requiresAuth && !currentUser) next('/login');
   else next();
 
 });

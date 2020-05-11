@@ -58,7 +58,6 @@ import store from '../../store/index.js';
                             alert("Wrong email/password")
                         }else{
                             store.dispatch('setUser',response.data);
-                            console.log(response.data[0]['admin']=="0");
                             if(response.data[0]['admin']=="0"){
                                 this.$router.replace('/');
                             }else{
@@ -81,7 +80,6 @@ import store from '../../store/index.js';
                 }else{
                     var user=null;
                     store.dispatch('setSignOutUser',user);
-                    console.log(this.$store.getters.getUser);
                     if(this.$store.getters.getUser==null){
                         alert('You have sign out')
                     }

@@ -31,14 +31,6 @@
                     <v-btn color="red accent-4" @click.prevent="deleteCar(car.id)" >
                         Delete
                     </v-btn>
-
-                    <v-btn color="orange" >
-                        <router-link v-bind:to="{name:'car',params:{
-                                        id:car.id,
-                                        }}">
-                            Explore
-                        </router-link>
-                    </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>

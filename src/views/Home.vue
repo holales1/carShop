@@ -9,7 +9,6 @@
               v-for="(item,i) in items"
               :key="i"
               :src="item.url"
-              reverse-transition="fade-transition"
             ></v-carousel-item>
         </v-carousel>
       </v-flex> 

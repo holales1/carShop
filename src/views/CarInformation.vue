@@ -20,7 +20,11 @@
                 <v-btn text>Price:{{ca.price}} kr</v-btn>
 
                 <v-btn color="purple" text>
-                    Buy
+                    <router-link v-bind:to="{name:'buycar',params:{
+                                    id:ca.id,
+                                }}">
+                        Explore
+                    </router-link>
                 </v-btn>
 
                 <v-spacer></v-spacer>
@@ -80,7 +84,6 @@ import store from '../store/index.js';
         },
         methods:{
             getProfilePhoto(car){
-                console.log(car.image);
                 return "/img/"+car.image;
             },
 

@@ -19,17 +19,20 @@
                     <v-card-title>{{car.name}}</v-card-title>
                     </v-img>
 
-                    <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+                    <v-card-subtitle class="pb-0">{{car.motor}}</v-card-subtitle>
 
                     <v-card-text class="text--primary">
-                    <div>Whitehaven Beach</div>
+                    <div>{{car.description}}</div>
 
-                    <div>Whitsunday Island, Whitsunday Islands</div>
                     </v-card-text>
 
                     <v-card-actions>
-                    <v-btn color="red accent-4" @click.prevent="deleteCar(car.id)" >
+                    <v-btn v-if="car.isAvaliable=='1'" color="red accent-4" @click.prevent="deleteCar(car.id)" >
                         Delete
+                    </v-btn>
+
+                    <v-btn v-else-if="car.isAvaliable=='0'" color="green accent-4" @click.prevent="recoverCar(car.id)" >
+                        Add
                     </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -57,7 +60,7 @@
                     </v-card-text>
 
                     <v-card-actions>
-                    <v-btn color="green" >
+                    <v-btn  color="green" >
                         <router-link to="/addNew">
                             Add new Car
                         </router-link>
@@ -87,7 +90,7 @@ import store from '../store/index.js';
             }
         },
         created() {
-            axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbCar.php')
+            axios.get('https://carshopalejandro.000webhostapp.com/dbCarAdmin.php')
             .then(response => {
                 store.dispatch('setCarsBuy',response.data);
             })
@@ -97,10 +100,20 @@ import store from '../store/index.js';
         },
         methods:{
             getProfilePhoto(car){
-                return "img/"+car.image;
+                return "https://carshopalejandro.000webhostapp.com/img/"+car.image;
             },
             deleteCar(id){
-                axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbDeleteCar.php?id='+id)
+                axios.get('https://carshopalejandro.000webhostapp.com/dbDeleteCar.php?id='+id)
+                .then(response => {
+                    store.dispatch('setCarsBuy',response.data);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
+
+            recoverCar(id){
+                axios.get('https://carshopalejandro.000webhostapp.com/dbRecoverCar.php?id='+id)
                 .then(response => {
                     store.dispatch('setCarsBuy',response.data);
                 })

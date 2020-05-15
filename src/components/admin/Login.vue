@@ -52,7 +52,7 @@ import store from '../../store/index.js';
                 if(this.$store.getters.getUser==null || this.$store.getters.getUser.length==0){
 
                 
-                    axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbUserRead.php?email='+this.email+'&pass='+this.password)
+                    axios.get('https://carshopalejandro.000webhostapp.com/dbUserRead.php?email='+this.email+'&pass='+this.password)
                     .then(response => {
                         if(response.data.length==0){
                             alert("Wrong email/password")

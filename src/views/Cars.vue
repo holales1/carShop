@@ -64,7 +64,7 @@ import store from '../store/index.js';
             }
         },
         created() {
-            axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbCar.php')
+            axios.get('https://carshopalejandro.000webhostapp.com/dbCar.php')
             .then(response => {
                 store.dispatch('setCarsBuy',response.data);
             })
@@ -74,7 +74,7 @@ import store from '../store/index.js';
         },
         methods:{
             getProfilePhoto(car){
-                return "img/"+car.image;
+                return "https://carshopalejandro.000webhostapp.com/img/"+car.image;
             }
         },
         computed:{

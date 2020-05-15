@@ -31,6 +31,14 @@
                     required>
                     </v-text-field>
 
+                    <v-text-field
+                    v-model="price"
+                    label="Price"
+                    type="number"
+                    :rules="priceRules"
+                    required>
+                    </v-text-field>
+
                     <input type="file" @change="onFileSelected">
                 </div>
             </v-col>
@@ -64,6 +72,7 @@ import axios from 'axios';
                 description:'',
                 image:[],
                 motor:'',
+                price:'',
                 nameRules: [
                 v => !!v || 'Name is required',
                 ],
@@ -72,6 +81,9 @@ import axios from 'axios';
                 ],
                 motorRules: [
                     v => !!v || 'Motor is required',
+                ],
+                priceRules: [
+                    v => !!v || 'Price is required',
                 ],
             }
         },
@@ -90,7 +102,8 @@ import axios from 'axios';
                     formData.append('nameCar', this.nameCar);
                     formData.append('description', this.description);
                     formData.append('motor', this.motor);
-                    axios.post('http://localhost/Progressive%20Web%20Development/DBCarShop/dbCreateCar.php',
+                    formData.append('price', this.price);
+                    axios.post('https://carshopalejandro.000webhostapp.com/dbCreateCar.php',
                         formData,
                         {
                             headers: {

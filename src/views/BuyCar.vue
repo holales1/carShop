@@ -37,12 +37,12 @@
                     required>
                     </v-text-field>
 
-                    <v-img :src="getProfilePhoto(car)" height="200px"></v-img>
+                    <v-img :src="getProfilePhoto(car)" height="50%"></v-img>
 
                      <v-btn
                      class="mt-4"
                     color="green"
-                        @click.prevent=""
+                        @click.prevent="addOrder()"
                     >
                     
                     Buy
@@ -58,7 +58,7 @@
 
 <script>
 import axios from 'axios';
-import store from '../store/index.js';
+
 
     export default {
         data() {
@@ -77,30 +77,31 @@ import store from '../store/index.js';
             this.user=this.$store.getters.getUser[0];
             this.name=this.user.Name;
             this.email=this.user.email;
-            this.UserID=this.user.userID;
-   
+            this.UserID=this.user.UserID;
+
             this.car=this.$store.getters.getCarBuy[0];
             this.Carname=this.car.name;
             this.price=this.car.price;
             this.carId=this.car.id;
-
-
-
-            axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbCar.php')
-            .then(response => {
-                store.dispatch('setCarsBuy',response.data);
-            })
-            .catch(error => {
-                console.log(error)
-            })
         },
         methods:{
             getProfilePhoto(car){
-                return "/img/"+car.image;
+                return "https://carshopalejandro.000webhostapp.com/img/"+car.image;
             },
-            get(){
-                console.log(this.$store.getters.getUser[0]);
-                console.log(this.$store.getters.getCarBuy[0]);
+            addOrder(){
+                let formData = new FormData();
+                formData.append('userID', this.UserID);
+                formData.append('carID', this.carId);
+                axios.post('https://carshopalejandro.000webhostapp.com/dbaddOrder.php',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                    ).then(function() {
+                        alert('Order added');
+                });
             }
         },
         computed:{

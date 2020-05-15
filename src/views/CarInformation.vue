@@ -74,7 +74,7 @@ import store from '../store/index.js';
         created() {
             var url=window.location.href;
             var id=url.split("car/")
-            axios.get('http://localhost/Progressive%20Web%20Development/DBCarShop/dbCarRead.php?id='+id[1])
+            axios.get('https://carshopalejandro.000webhostapp.com/dbCarRead.php?id='+id[1])
             .then(response => {
                 store.dispatch('setCarBuy',response.data);
             })
@@ -84,7 +84,7 @@ import store from '../store/index.js';
         },
         methods:{
             getProfilePhoto(car){
-                return "/img/"+car.image;
+                return "https://carshopalejandro.000webhostapp.com/img/"+car.image;
             },
 
         },
